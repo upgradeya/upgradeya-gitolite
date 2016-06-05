@@ -1,0 +1,8 @@
+PROJECT_PRODUCTION=true
+PROJECT_NAMESPACE="gitolite"
+PROJECT_SSH_PORT="10022"
+PROJECT_SSH_KEY_NAME='admin'
+
+# Set root ssh key
+PROJECT_GITOLITE_ADMIN_SSH_KEY=$(cat $(_decompose-project-root)/admin.pub)
+# vim:syntax=sh
