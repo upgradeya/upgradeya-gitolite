@@ -5,4 +5,5 @@ PROJECT_SSH_KEY_NAME='admin'
 
 # Set root ssh key
 PROJECT_GITOLITE_ADMIN_SSH_KEY=$(cat $(_decompose-project-root)/admin.pub)
+
 # vim:syntax=sh
