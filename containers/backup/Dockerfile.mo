@@ -18,31 +18,31 @@ apt-get install -y -q --no-install-recommends \
 RUN useradd -m -s /bin/bash duply
 
 # Copy duply profiles
-COPY .duply/ /root/.duply
+COPY .duply/ {{PROJECT_BACKUP_USER_HOME}}/.duply
 # Copy ssh keys
-COPY .ssh/ /root/.ssh
+COPY .ssh/ {{PROJECT_BACKUP_USER_HOME}}/.ssh
 
 # Add GPG keys for encrypting config tars
-COPY public_keys /root/public_keys
-COPY load_developer_keys /root/
-RUN chmod a+rx /root/load_developer_keys
+COPY public_keys {{PROJECT_BACKUP_USER_HOME}}/public_keys
+COPY load_developer_keys {{PROJECT_BACKUP_USER_HOME}}/
+RUN chmod a+rx {{PROJECT_BACKUP_USER_HOME}}/load_developer_keys
 
 # Setup volumes for backup
-RUN install -dm777 /root/backup && \
-  install -dm777 /root/{{PROJECT_BACKUP_CONFIG_BACKUP_DIRECTORY}} && \
-  install -dm777 /root/.cache/duplicity
-VOLUME /root/backup
-VOLUME /root/{{PROJECT_BACKUP_CONFIG_BACKUP_DIRECTORY}}
-VOLUME /root/.cache/duplicity
+RUN install -dm777 {{PROJECT_BACKUP_USER_HOME}}/backup && \
+  install -dm777 {{PROJECT_BACKUP_USER_HOME}}/{{PROJECT_BACKUP_CONFIG_BACKUP_DIRECTORY}} && \
+  install -dm777 {{PROJECT_BACKUP_USER_HOME}}/.cache/duplicity
+VOLUME {{PROJECT_BACKUP_USER_HOME}}/backup
+VOLUME {{PROJECT_BACKUP_USER_HOME}}/{{PROJECT_BACKUP_CONFIG_BACKUP_DIRECTORY}}
+VOLUME {{PROJECT_BACKUP_USER_HOME}}/.cache/duplicity
 
 # Build site
-WORKDIR /root
+WORKDIR {{PROJECT_BACKUP_USER_HOME}}
 
 # Load the public keys into key chain for encrypting config tars
 RUN ./load_developer_keys
 
 # Copy backup service script
-COPY backup_service /root/backup_service
+COPY backup_service {{PROJECT_BACKUP_USER_HOME}}/backup_service
 
 # Run backup service script by default
-CMD /root/backup_service
+CMD {{PROJECT_BACKUP_USER_HOME}}/backup_service
