@@ -19,8 +19,8 @@ backup:
   volumes_from:
     - gitolite
   log_driver: {{PROJECT_DOCKER_LOG_DRIVER}}
-{{#PRODUCTION}}
+{{#PROJECT_PRODUCTION}}
   restart: always
-{{/PRODUCTION}}
+{{/PROJECT_PRODUCTION}}
 
 # vi: set tabstop=2 expandtab syntax=yaml:
