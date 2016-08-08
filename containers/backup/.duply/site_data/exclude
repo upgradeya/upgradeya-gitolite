@@ -6,6 +6,6 @@
 # - **
 # for more details see duplicity manpage, section File Selection
 # http://duplicity.nongnu.org/duplicity.1.html#sect9
-+ /home/git/repositories
-+ /etc/ssh
++ /var/lib/git
++ /etc/ssh/keys
 - **
